@@ -69,7 +69,7 @@ func (s *Scheduler) syncTriggers() {
 		// If trigger is new, add it
 		if _, exists := s.Jobs[trigger.ID]; !exists {
 			if trigger.OneTime {
-				duration, err := parseOneTimeSchedule(trigger.Schedule)
+				duration, err := ParseOneTimeSchedule(trigger.Schedule)
 				if err == nil {
 					go func(t models.Trigger) {
 						time.Sleep(duration)
@@ -134,7 +134,7 @@ func (s *Scheduler) executeScheduledTrigger(trigger models.Trigger) {
 }
 
 // parseOneTimeSchedule converts different formats like "in 10 seconds" or "10s" into time.Duration
-func parseOneTimeSchedule(schedule string) (time.Duration, error) {
+func ParseOneTimeSchedule(schedule string) (time.Duration, error) {
 	duration, err := time.ParseDuration(schedule)
 	if err == nil {
 		return duration, nil

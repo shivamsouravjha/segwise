@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"net/http"
 	"segwise/clients/postgres"
+	"segwise/helpers"
 	"segwise/models"
 	"time"
 
@@ -38,7 +39,12 @@ func CreateTrigger(c *gin.Context) {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Trigger type must be 'scheduled' or 'api'"})
 		return
 	}
-
+	_, err := helpers.ParseOneTimeSchedule(trigger.Schedule)
+	if err != nil {
+		zap.L().Error("Invalid schedule", zap.Error(err))
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid schedule, please use a schema like 'in 5 minutes'"})
+		return
+	}
 	if err := db.Create(&trigger).Error; err != nil {
 		zap.L().Error("Failed to create trigger", zap.Error(err))
 		c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to create trigger"})
