@@ -52,7 +52,6 @@ A Golang-based API to create and manage event triggers (scheduled & API-based).
 
 ### 1️⃣ Prerequisites
 - Install **Docker**: [Docker Install Guide](https://docs.docker.com/get-docker/)
-- Install **Docker Compose**
 
 ### 2️⃣ Clone Repository
 ```sh
@@ -62,7 +61,7 @@ cd segwise
 
 ### 3️⃣ Run with Docker
 ```sh
-docker-compose up --build
+docker compose up --build
 ```
 
 The API will run on `http://localhost:4000`.
