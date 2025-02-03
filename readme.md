@@ -229,3 +229,10 @@ go test -v ./... -cover
 - Fly.io **free tier** is used, so **scaling is limited**.
 
 ---
+
+
+## 📌 **Credits where due**
+- ChatGPT and CoPilot(dev related help)
+- Keploy VSCode extension to generate testcases
+
+---
